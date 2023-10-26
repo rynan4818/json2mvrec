@@ -10,7 +10,6 @@ namespace json2mvrec
     {
         public void ConvertMvrec(MovementJson org, string savePath)
         {
-            Console.WriteLine(savePath);
             var meta = new MovementJson
             {
                 objectCount = org.objectNames.Count,
@@ -81,7 +80,7 @@ namespace json2mvrec
                 if (result == null)
                     Console.WriteLine("Empty json");
             }
-            catch (JsonReaderException ex)
+            catch (JsonReaderException)
             {
                 result = null;
             }

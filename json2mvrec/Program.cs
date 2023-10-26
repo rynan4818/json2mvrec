@@ -11,15 +11,16 @@ namespace json2mvrec
             var convert = new Convert();
             foreach (var path in args)
             {
-                Console.WriteLine(path);
-                var json = convert.ReadRecordFile(path);
+                var fullpath = Path.GetFullPath(path);
+                Console.WriteLine(fullpath);
+                var json = convert.ReadRecordFile(fullpath);
                 if (json == null)
                 {
                     Console.WriteLine("JSON read ERR!");
                     continue;
                 }
                 Console.WriteLine("JSON read OK");
-                var savePath = Path.GetFileNameWithoutExtension(Path.GetFullPath(path)) + ".mvrec";
+                var savePath = Path.Combine(Path.GetDirectoryName(fullpath), Path.GetFileNameWithoutExtension(fullpath) + ".mvrec");
                 Console.WriteLine(savePath);
                 convert.ConvertMvrec(json, savePath);
             }
