@@ -73,14 +73,21 @@ namespace json2mvrec
             try
             {
                 if (json == null)
-                    throw new JsonReaderException($"Json file error {path}");
+                {
+                    Console.WriteLine("Json file error");
+                    throw new JsonReaderException();
+                }
                 result = JsonConvert.DeserializeObject<MovementJson>(json);
                 if (result == null)
-                    throw new JsonReaderException($"Empty json {path}");
+                    Console.WriteLine("Empty json");
             }
-            catch (JsonException ex)
+            catch (JsonReaderException ex)
             {
-                Console.WriteLine(ex.ToString());
+                result = null;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Unexpected error in reading JSON");
                 result = null;
             }
             return result;
